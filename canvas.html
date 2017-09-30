@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>you know</title>
+  </head>
+  <body>
+    <div class="">
+      <canvas id="canvas" ></canvas>
+    </div>
+    <script type="text/javascript">
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.height = 300;
+      canvas.width = 600;
+
+
+      function  draw() {
+        for(let i = 0; i < 6; i ++ ){
+          for(let j = 0; j < 6; j++ ){
+            var x = `rgb(0,` +Math.floor(255-42.5 * i)+`,`+Math.floor(255-42.5 * j)+`)`
+            ctx.fillStyle = x;
+            ctx.fillRect( j * 25, i * 25, 25, 25 );
+            ctx.strokeStyle = x ;
+
+            ctx.beginPath();
+            ctx.arc( 200 + j * 25, 12.5+ i * 25, 12.5, 0, Math.PI * 2, true );
+            ctx.stroke();
+            ctx.closePath();
+
+            // ctx.fill()
+          }
+        }
+        ctx.beginPath();
+        ctx.arc(300,100,30,0, Math.PI *2, true);
+        ctx.arc(300,100,15,0, Math.PI *2, true);
+        ctx.fill('evenodd');
+        ctx.closePath();
+
+
+        let text = ctx.measureText('foo');
+        console.dir(text);
+
+        (new Image()).src = 'bg.bmp';
+
+      }
+      draw()
+
+    </script>
+  </body>
+</html>

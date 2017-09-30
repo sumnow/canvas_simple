@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      body{
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="800" height="800"></canvas>
+
+    <script type="text/javascript">
+      const ctx = document.querySelector('#canvas').getContext('2d');
+      const size = 256;
+      const arr = Array.from({length: 8},()=> {return {radi: 0, rota: 0, x: 0}});
+      var width = 800,height = 800;
+      var i = 0;
+      var r = 0;
+      let num = 5;
+      let rpi = Math.PI*2 / num;
+      function draw () {
+        ctx.clearRect(0, 0, width, height);
+        for(let i=0; i<arr.length; i++){
+          if(arr[i].x == size){
+            arr[i].x = 0;
+            arr[i].radi = 0;
+          }
+          ctx.beginPath();
+          ctx.moveTo(width/2, height/2);
+          ctx.lineTo(width/2, height/2-100);
+          ctx.arc(width/2, height/2-arr[i].x,arr[i].radi,0,Math.PI *2,true);
+          ctx.translate(width/2, height/2);
+          arr[i].x++;
+          arr[i].radi++;
+          ctx.rotate(rpi);
+          ctx.strokeStyle = 'rgba(255,255,255,1)';
+          ctx.stroke();
+          // ctx.rotate(-rpi);
+          ctx.translate(-width/2, -height/2);
+          ctx.closePath();
+        }
+      }
+
+      function v(){
+
+        draw();
+        requestAnimationFrame(v)
+      }
+      requestAnimationFrame(v);
+      // setInterval(v,1000)
+
+    </script>
+  </body>
+</html>
